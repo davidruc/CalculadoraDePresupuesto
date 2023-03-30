@@ -1,13 +1,4 @@
-import myHeader from "./components/myHeader.js";
+import myComponent from "./components/myComponent.js";
 
-myHeader.show();
+myComponent.show();
 
-let formulario = document.querySelector(`#formulario`);
-
-self.addEventListener("submit", (e)=>{
-    e.preventDefault();
-    let data = Object.fromEntries(new FormData(e.target))
-    console.log(data);
-
-    formulario.reset();
-})
