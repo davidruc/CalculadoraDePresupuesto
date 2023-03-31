@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presupueto</title>
+    <title>Presupuesto</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="main.js" type="module" defer ></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -14,20 +14,8 @@
 <body >
     <div class="contenedor container-100 col-12">
         <header >
-            <div class="fondo col-12 py-5  d-flex flex-column align-items-center">
-                <h5 class="py-3">Presupuesto disponible</h5> 
-                <h1 class="pb-3">$ -----------</h1>
+            <div id="superior" class="fondo col-12 py-5  d-flex flex-column align-items-center">
                 
-                    <div class="ing col-12 p-3 w-25 justify-content-between mb-2 d-flex justify-content-center">
-                        <p class="">INGRESOS</p>
-                        <p>$--------</P>
-                        <p>---%</p>
-                    </div>  
-                    <div class="ing2 col-12 w-25 p-3 d-flex  justify-content-between justify-content-center">
-                        <p>INGRESOS</p>
-                        <p>$--------</P>
-                        <p>---%</p>
-                    </div>
              
             </div>
         </header>
@@ -47,26 +35,8 @@
             </div>
         </nav>
 
-        <div class="datos col-12  py-5  d-flex flex-column flex-md-row gap-5 justify-content-center ">
-            <div class="ingresos col-12 col-md-6 w-25 p-5">
-                <h2>INGRESOS</h2>
-                
-                <div class="datoIngreso p-3 d-flex  justify-content-between">
-                    <p>tipoDeIngreso</p>
-                    <p>+ $-----</p>
-                </div>
-                
-            </div>
-            <div class="egresos col-12 col-md-6 w-25 p-5">
-                <h2>EGRESOS</h2>
-               
-                <div class="datoIngreso p-3 d-flex justify-content-between">
-                    <p>tipoDeEngreso</p>
-                    <p>- $-----</p>
-                    <p>---%</p>
-                </div>
-                
-            </div>
+        <div id="ingresos" class="datos col-12  py-5  d-flex flex-column flex-md-row gap-5 justify-content-center ">
+            
         </div>
     </div>
     
