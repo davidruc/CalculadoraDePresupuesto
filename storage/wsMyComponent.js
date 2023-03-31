@@ -3,42 +3,58 @@ let wsMyComponent = {
     
     imprimirDatos(p1) {
             return `
-            <h5 class="py-3">${p1.titulo}</h5> 
+            <h5 class="py-3">Presupuesto disponible</h5> 
             <h1 class="pb-3">$ ${p1.contador}</h1>
                 <div class="ing col-12 p-3 w-25 justify-content-between mb-2 d-flex justify-content-center">
-                    <p class="">${p1.ingresos.titulo}</p>
+                    <p class="">INGRESOS</p>
                     <p>$${p1.ingresos.contador}</p>
                 </div>  
                 <div class="ing2 col-12 w-25 p-3 d-flex  justify-content-between justify-content-center">
-                <p class="">${p1.egresos.titulo}</p>
+                <p class="">EGRESOS</p>
                 <p>$${p1.egresos.contador}</p>
                 <p>${p1.egresos.porcentaje}%</p>
                 </div>`        
             
       
       },
+  
 
-      imprimirIngresos(){
+
+      imprimirIngresos(p1){
+
+        
         return `<div class="ingresos col-12 col-md-6 w-25 p-5">
         <h2>INGRESOS</h2>
         
-        <div class="datoIngreso p-3 d-flex  justify-content-between">
-            <p>tipoDeIngreso</p>
-            <p>+ $-----</p>
+        <div class="datoIngreso d-flex  justify-content-between">
+        <table class="table table-striped">
+        <tbody>
+          ${p1.ingresos.datos.map((val, id)=> {return `<tr><td>${val.tipo} </td> <td>${val.valor}</td></tr>`}).join("")}
+        </tbody>
+        </table>
+            
+            
         </div>
         
     </div>
     <div class="egresos col-12 col-md-6 w-25 p-5">
         <h2>EGRESOS</h2>
        
-        <div class="datoIngreso p-3 d-flex justify-content-between">
-            <p>tipoDeEngreso</p>
-            <p>- $-----</p>
-            <p>---%</p>
+        <div class="datoIngreso d-flex justify-content-between">
+        <table class="table table-striped">
+        <tbody>
+        
+        ${p1.egresos.datos.map((val, id)=> {return `<tr><td>${val.tipo} </td> <td>${val.valor}</td><td>${p1.egresos.porcentajes[id]}</td></tr>`}).join("")}
+          
+        </tbody>
+        </table>
+            
         </div>
         
     </div>`
-      }
+      },
+        
+
 }
 self.addEventListener("message", (e)=>{
     postMessage(wsMyComponent[`${e.data.module}`](e.data.data));

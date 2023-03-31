@@ -29,7 +29,7 @@ export default{
 
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
-        console.log(data);
+       
         if(data.signo == "+"){
             contadorIngresos = contadorIngresos + parseInt(data.valor);
             this.contenido.ingresos.datos.unshift(data);
@@ -37,19 +37,24 @@ export default{
              
         }else{
             contadorEgresos = contadorEgresos - parseInt(data.valor);
+            this.contenido.egresos.datos.unshift(data.valor);
+            this.contenido.egresos.datos1.map((val, id)=>{
+                console.log(val);
+                /* let porcentaje2 = -(100*val[id])/contadorEgresos;
+                this.contenido.egresos.porcentajes.unshift(porcentaje2) */
+            })
             this.contenido.egresos.datos.unshift(data);
             this.contenido.egresos.contador = contadorEgresos; 
+            
+            
+            
+            
             
         };
         disponible = contadorIngresos - (-contadorEgresos);
         this.contenido.contador = disponible;
         porcentajetotal = -(100*contadorEgresos)/contadorIngresos;
         this.contenido.egresos.porcentaje = parseInt(porcentajetotal);
-        console.log(this.contenido);
-        console.log(contadorEgresos);
-        console.log(contadorIngresos);
-        console.log(disponible);
-        console.log(porcentajetotal);
         informacion.reset();
         
         const ws = new Worker("storage/wsMyComponent.js", {type:"module"});
@@ -61,8 +66,8 @@ export default{
         ws.postMessage({module: "imprimirIngresos", data: this.contenido});
         
         ws.addEventListener("message", (e)=>{
-            let doc = new DOMParser().parseFromString(e.data, "text/html");
-            document.querySelector(id[count]).append(...doc.body.children);
+            
+            document.querySelector(id[count]).innerHTML = e.data;
             (id.length-1==count) ? ws.terminate() : count++;
         })
 

@@ -1,22 +1,27 @@
 export default{
     dataMyComponent(){
         localStorage.setItem("myComponent", JSON.stringify({
-            contenido:{
-                titulo: "Presupuesto disponible",
-                contador: 0,
-                ingresos: {
-                    titulo: "INGRESOS",
-                    contador: 0,
+            contenido:{     
+                contador: "",
+
+                ingresos: {                 
+                    contador: 
+                    "",
                     datos: [
         
                     ]
                     
                 },
                 egresos: {
-                    titulo: "EGRESOS",
-                    contador: 0,
-                    porcentaje: 0,
+                    contador: "",
+                    porcentaje: "",
+                    datos1:[],
+                    porcentajes: [
+
+                    ],
                     datos: [
+                        
+                        
         
                     ]
                 }
