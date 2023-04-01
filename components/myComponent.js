@@ -1,10 +1,11 @@
 import config from "../storage/config.js";
 let informacion = document.querySelector("#formulario");
+
 let contadorIngresos = 0;
 let contadorEgresos = 0; 
 let disponible = 0;
 let porcentajetotal = 0;
-
+let cuenta = 0;
 export default{
     
     
@@ -25,7 +26,7 @@ export default{
           (id.length-1==count) ? ws.terminate() : count++;
       })
       informacion.addEventListener("submit", (e)=>{
-
+        
 
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
@@ -42,20 +43,18 @@ export default{
             console.log(this.contenido.egresos.info);
             
             let calculoPorcentajes = "";
+            
             this.contenido.egresos.info.map((val,id)=>{
-                console.log(val);
                 val.porcentajes = [];
                 val.datos.unshift(data.valor)
+                cuenta = 0;
                 val.datos.map((val2,id)=>{
                     calculoPorcentajes = parseInt(-(parseInt(val2)*100)/contadorEgresos);
-                    console.log(calculoPorcentajes);
-                    val.porcentajes.push(calculoPorcentajes)
+                    val.porcentajes.push(calculoPorcentajes);
+                    cuenta++
                 })
-             
-                console.log(val.porcentajes);
-                
             })
-            console.log(calculoPorcentajes);
+           
             
             /* this.contenido.egresos.info.foreach((val, id)=>{
                 console.log("gonoreeaaaa");
@@ -64,7 +63,9 @@ export default{
                 console.log(porcentaje2);
             }) */
             this.contenido.egresos.datos.unshift(data);
-            this.contenido.egresos.contador = contadorEgresos;         
+            this.contenido.egresos.contador = contadorEgresos;  
+            
+           
         };
         
         disponible = contadorIngresos - (-contadorEgresos);
@@ -87,9 +88,24 @@ export default{
             (id.length-1==count) ? ws.terminate() : count++;
         })
 
+        console.log("esta es mi cuenta",cuenta);
+
+        for (let i = 0; i < cuenta; i++) {
+            console.log("esta es mi cuenta",cuenta);
+            console.log(i);
+                console.log(`#btn${i}`);
+                let botones = document.querySelector(`#btn${i}`);//estoy llamando del documento algo que no existe, ya que lo creo en el worker, debe haber alguna forma de enlazarlos, por eso es Null
+                console.log(botones);
+                botones.addEventListener("click", (e)=>{
+                    console.log(`hey, le di click al ${i} `);
+                    /* this.contenido.egresos.delete.datos[i]; */
+                    console.log(this.contenido.egresos.datos);
+                })
+            }
         
         })
-       
+        
+        
     },
 
     

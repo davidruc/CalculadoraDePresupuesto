@@ -44,7 +44,7 @@ let wsMyComponent = {
         <table class="table table-striped">
         <tbody>
         
-        ${p1.egresos.datos.map((val, id)=> {return `<tr><td>${val.tipo} </td> <td>${val.valor}</td>${p1.egresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}</tr>`}).join("")}
+        ${p1.egresos.datos.map((val, id)=> {return `<tr><td>${val.tipo} </td> <td>${val.valor}</td>${p1.egresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}<td><button id="btn${id}" class="btn"> x </button></td></tr>`}).join("")}
         
         
         
