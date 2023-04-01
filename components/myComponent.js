@@ -37,20 +37,36 @@ export default{
              
         }else{
             contadorEgresos = contadorEgresos - parseInt(data.valor);
-            this.contenido.egresos.datos.unshift(data.valor);
-            this.contenido.egresos.datos1.map((val, id)=>{
+            /* this.contenido.egresos.datos.unshift(data.valor); */
+            
+            console.log(this.contenido.egresos.info);
+            
+            let calculoPorcentajes = "";
+            this.contenido.egresos.info.map((val,id)=>{
                 console.log(val);
-                /* let porcentaje2 = -(100*val[id])/contadorEgresos;
-                this.contenido.egresos.porcentajes.unshift(porcentaje2) */
+                val.porcentajes = [];
+                val.datos.unshift(data.valor)
+                val.datos.map((val2,id)=>{
+                    calculoPorcentajes = parseInt(-(parseInt(val2)*100)/contadorEgresos);
+                    console.log(calculoPorcentajes);
+                    val.porcentajes.push(calculoPorcentajes)
+                })
+             
+                console.log(val.porcentajes);
+                
             })
+            console.log(calculoPorcentajes);
+            
+            /* this.contenido.egresos.info.foreach((val, id)=>{
+                console.log("gonoreeaaaa");
+                let porcentaje2 = -(100*val[id])/contadorEgresos;
+                this.contenido.egresos.porcentajes.unshift(porcentaje2)
+                console.log(porcentaje2);
+            }) */
             this.contenido.egresos.datos.unshift(data);
-            this.contenido.egresos.contador = contadorEgresos; 
-            
-            
-            
-            
-            
+            this.contenido.egresos.contador = contadorEgresos;         
         };
+        
         disponible = contadorIngresos - (-contadorEgresos);
         this.contenido.contador = disponible;
         porcentajetotal = -(100*contadorEgresos)/contadorIngresos;

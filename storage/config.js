@@ -15,10 +15,18 @@ export default{
                 egresos: {
                     contador: "",
                     porcentaje: "",
-                    datos1:[],
-                    porcentajes: [
+                    
+                    info:[{
+                        datos:[
+                            
+                        ],
+                        porcentajes: [
 
+                        ]
+                    }
+                        
                     ],
+                    
                     datos: [
                         
                         
