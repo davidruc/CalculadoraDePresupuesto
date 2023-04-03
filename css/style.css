@@ -1,10 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-
 }
- 
-
 .contenedor p {
     margin-bottom: 0;
 }
@@ -19,13 +16,38 @@
     background-attachment: fixed;
     background-size: cover;
 }
-
 .ing{
+    border-radius: 4vh;
     background-color: aquamarine;
 }
 .ing2{
-    background-color: rgb(252, 44, 44);
+    border-radius: 4vh;
+    background-color: rgb(255, 73, 73);
 }
-#btn1{
-    border:solid 1px red;
+.porce{
+    background-color:rgba(247, 132, 132, 0.801);
+}
+.btn3{
+    border:solid 1px rgb(255, 117, 117);
+    border-radius: 100%;
+    width: 24px;
+    background-color: rgb(250, 111, 111);
+    color: white;
+}
+tr .tdimportant{
+    position: absolute;
+    right: 0;
+    display: none;
+}
+tr:hover .tdimportant{
+    display: block;
+    position: relative;
+    transition: all 500ms ease-out; 
+}
+tr:hover {
+    transform: scale(1.2);
+    transition: all 200ms ease-out;
+}
+.table td {
+    white-space: nowrap;
 }

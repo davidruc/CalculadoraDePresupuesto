@@ -26,8 +26,6 @@ export default{
           (id.length-1==count) ? ws.terminate() : count++;
       })
       informacion.addEventListener("submit", (e)=>{
-        
-
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
        
@@ -37,9 +35,7 @@ export default{
             this.contenido.ingresos.contador = contadorIngresos;
              
         }else{
-            contadorEgresos = contadorEgresos - parseInt(data.valor);
-            /* this.contenido.egresos.datos.unshift(data.valor); */
-            
+            contadorEgresos = contadorEgresos - parseInt(data.valor);    
             console.log(this.contenido.egresos.info);
             
             let calculoPorcentajes = "";
@@ -54,14 +50,6 @@ export default{
                     cuenta++
                 })
             })
-           
-            
-            /* this.contenido.egresos.info.foreach((val, id)=>{
-                console.log("gonoreeaaaa");
-                let porcentaje2 = -(100*val[id])/contadorEgresos;
-                this.contenido.egresos.porcentajes.unshift(porcentaje2)
-                console.log(porcentaje2);
-            }) */
             this.contenido.egresos.datos.unshift(data);
             this.contenido.egresos.contador = contadorEgresos;  
             
@@ -102,14 +90,8 @@ export default{
                     console.log(this.contenido.egresos.datos);
                 })
             }
-        
-        })
-        
-        
-    },
-
-    
-    
+        })  
+    },   
 }
 
 
