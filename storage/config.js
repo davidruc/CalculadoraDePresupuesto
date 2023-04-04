@@ -1,19 +1,32 @@
 export default{
     dataMyComponent(){
-        localStorage.setItem("myComponent", JSON.stringify({
+        const data = {
             contenido:{     
-                contador: "",
+                contador: 0,
 
                 ingresos: {                 
-                    contador: 
-                    "",
+                    contador: 0,
+                    info:[{
+                        datos:[
+                            
+                        ],
+                        porcentajes: [
+
+                        ],
+                        nombres:[
+                            
+                        ]
+
+                    }
+                        
+                    ],
                     datos: [
         
                     ]
                     
                 },
                 egresos: {
-                    contador: "",
+                    contador: 0,
                     porcentaje: "",
                     
                     info:[{
@@ -22,23 +35,25 @@ export default{
                         ],
                         porcentajes: [
 
+                        ],
+                        nombres:[
+                            
                         ]
+
                     }
                         
                     ],
                     
                     datos: [
-                        
-                        
-        
                     ]
                 }
         
                 
         
             },
-            
-        }))
+        }
+        const feto = localStorage.getItem("myComponent");
+        if (!feto) localStorage.setItem("myComponent", JSON.stringify(data));
     }
 }
 

@@ -32,36 +32,43 @@ export default{
         let data = Object.fromEntries(new FormData(e.target));
        
         if(data.signo == "+"){
-            contadorIngresos = contadorIngresos + parseInt(data.valor);
+            contadorIngresos = this.contenido.ingresos.contador + parseInt(data.valor);
             this.contenido.ingresos.datos.unshift(data);
             this.contenido.ingresos.contador = contadorIngresos;
+
+            let calculoPorcentajes2 = 0;
+
+            this.contenido.ingresos.info.map((val, id)=>{
+              val.porcentajes = [];
+              val.datos.unshift(data.valor);
+              val.nombres.unshift(data.tipo);
+              val.datos.map((val2,id)=>{
+                calculoPorcentajes2 = parseInt((parseInt(val2)*100)/contadorIngresos);
+                val.porcentajes.push(calculoPorcentajes2);
+            })
+            })
              
         }else{
-            contadorEgresos = contadorEgresos - parseInt(data.valor);    
-            console.log(this.contenido.egresos.info);
-            
-            let calculoPorcentajes = "";
+            contadorEgresos = this.contenido.egresos.contador - parseInt(data.valor);    
+            this.contenido.egresos.datos.unshift(data);
+            this.contenido.egresos.contador = contadorEgresos;  
+
+            let calculoPorcentajes = 0;
             
             this.contenido.egresos.info.map((val,id)=>{
                 val.porcentajes = [];
-                val.datos.unshift(data.valor)
-                cuenta = 0;
+                val.datos.unshift(data.valor);
+                val.nombres.unshift(data.tipo);
                 val.datos.map((val2,id)=>{
                     calculoPorcentajes = parseInt(-(parseInt(val2)*100)/contadorEgresos);
                     val.porcentajes.push(calculoPorcentajes);
-                    cuenta++
                 })
             })
-            this.contenido.egresos.datos.unshift(data);
-            this.contenido.egresos.contador = contadorEgresos;  
-            
-            
-           
+             
         };
-        console.log("ultimo", this.contenido);
         disponible = contadorIngresos - (-contadorEgresos);
         this.contenido.contador = disponible;
-        porcentajetotal = -(100*contadorEgresos)/contadorIngresos;
+        porcentajetotal = -(100*this.contenido.egresos.contador)/this.contenido.ingresos.contador;
         this.contenido.egresos.porcentaje = parseInt(porcentajetotal);
         informacion.reset();
         
@@ -72,18 +79,12 @@ export default{
         ws.postMessage({module: "imprimirDatos", data: this.contenido});
         id.push("#ingresos");
         ws.postMessage({module: "imprimirIngresos", data: this.contenido});
-       
-        console.log("aqui", this.contenido);
         ws.addEventListener("message", (e)=>{
-            
-            console.log(this.contenido);
             document.querySelector(id[count]).innerHTML = e.data;
             (id.length-1==count) ? ws.terminate() : count++;
         })
-        console.log("donde no se sube",this.contenido);
-        console.log("esta es mi cuenta",cuenta);
-
-        for (let i = 0; i < cuenta; i++) {
+       
+        /*         for (let i = 0; i < cuenta; i++) {
             console.log("esta es mi cuenta",cuenta);
             console.log(i);
                 console.log(`#btn${i}`);
@@ -92,10 +93,73 @@ export default{
                 console.log(botones);
                 botones.addEventListener("click", (e)=>{
                     console.log(`hey, le di click al ${i} `);
-                    /* this.contenido.egresos.delete.datos[i]; */
+                    
                     console.log(this.contenido.egresos.datos);
                 })
+            } */
+            const getOptionChart = ()=>{
+                return {
+                  title: {
+                    text: 'Gráfica de Egresos'
+                  },
+                  xAxis: {
+                    type: 'category',
+                    data: this.contenido.egresos.info[0].nombres
+                  },
+                  yAxis: {
+                    type: 'value'
+                  },
+                  series: [
+                    {
+                      data: this.contenido.egresos.info[0].porcentajes,
+                      type: 'bar',
+                      showBackground: true,
+                      backgroundStyle: {
+                        color: 'rgba(180, 180, 180, 0.2)'
+                      }
+                    }
+                  ]
+                };
             }
+            
+            const initCharts = ()=>{
+                const chart = echarts.init(document.querySelector("#graficas"));
+                chart.setOption(getOptionChart());
+            }
+            const getOptionChart2 = ()=>{
+             
+              return {
+                title: {
+                  text: 'Gráfica de Ingresos'
+                },
+                xAxis: {
+                  type: 'category',
+                  data: this.contenido.ingresos.info[0].nombres
+                },
+                yAxis: {
+                  type: 'value'
+                },
+                series: [
+                  {
+                    data: this.contenido.ingresos.info[0].porcentajes,
+                    type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: {
+                      color: 'rgba(180, 180, 180, 0.2)'
+                    }
+                  }
+                ]
+              };
+
+            }
+            const initCharts2 = ()=>{
+              const chart2 = echarts.init(document.querySelector("#graficas2"));
+              chart2.setOption(getOptionChart2());
+          }
+            initCharts2();
+            initCharts();
+    
+            localStorage.setItem("myComponent", JSON.stringify(this));     
         })
         
     },   
