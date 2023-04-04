@@ -19,7 +19,7 @@ let wsMyComponent = {
         return `<div class="ingresos col-12 col-md-6 w-25 p-5">
         <h2 class="px-1">INGRESOS</h2>  
         <div class="datoIngreso d-flex  justify-content-between">
-        <table class="table table-striped table-hover">
+        <table class="table ">
         <tbody>
           ${p1.ingresos.datos.map((val, id)=> {return `<tr><td class="text-center">${val.tipo} </td> <td>${val.valor}</td></tr>`}).join("")}
         </tbody>
@@ -29,7 +29,7 @@ let wsMyComponent = {
     <div class="egresos col-12 col-md-6 w-25 p-5">
         <h2 class="px-1">EGRESOS</h2>
         <div class="datoIngreso d-flex justify-content-between">
-        <table class="table table-striped table-hover">
+        <table class="table ">
         <tbody class="celda">
         ${p1.egresos.datos.map((val, id)=> {return `<tr class="trimportant text-end d-flex align-items-center justify-content-between"><td class="text-center">${val.tipo} </td> <td>${val.valor}</td>${p1.egresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}<td class="tdimportant"><button id="btn${id}" class="btn3"> x </button></td></tr>`}).join("")}
         </tbody>

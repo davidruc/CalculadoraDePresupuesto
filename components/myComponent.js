@@ -6,11 +6,13 @@ let contadorEgresos = 0;
 let disponible = 0;
 let porcentajetotal = 0;
 let cuenta = 0;
+
 export default{
     
     
     show(){
       config.dataMyComponent();
+      
       Object.assign(this, JSON.parse(localStorage.getItem("myComponent")));
       const ws = new Worker("storage/wsMyComponent.js", {type:"module"});
       let id = [];
@@ -53,9 +55,10 @@ export default{
             this.contenido.egresos.datos.unshift(data);
             this.contenido.egresos.contador = contadorEgresos;  
             
+            
            
         };
-        
+        console.log("ultimo", this.contenido);
         disponible = contadorIngresos - (-contadorEgresos);
         this.contenido.contador = disponible;
         porcentajetotal = -(100*contadorEgresos)/contadorIngresos;
@@ -69,13 +72,15 @@ export default{
         ws.postMessage({module: "imprimirDatos", data: this.contenido});
         id.push("#ingresos");
         ws.postMessage({module: "imprimirIngresos", data: this.contenido});
-        
+       
+        console.log("aqui", this.contenido);
         ws.addEventListener("message", (e)=>{
             
+            console.log(this.contenido);
             document.querySelector(id[count]).innerHTML = e.data;
             (id.length-1==count) ? ws.terminate() : count++;
         })
-
+        console.log("donde no se sube",this.contenido);
         console.log("esta es mi cuenta",cuenta);
 
         for (let i = 0; i < cuenta; i++) {
@@ -83,6 +88,7 @@ export default{
             console.log(i);
                 console.log(`#btn${i}`);
                 let botones = document.querySelector(`#btn${i}`);//estoy llamando del documento algo que no existe, ya que lo creo en el worker, debe haber alguna forma de enlazarlos, por eso es Null
+                
                 console.log(botones);
                 botones.addEventListener("click", (e)=>{
                     console.log(`hey, le di click al ${i} `);
@@ -90,7 +96,8 @@ export default{
                     console.log(this.contenido.egresos.datos);
                 })
             }
-        })  
+        })
+        
     },   
 }
 
