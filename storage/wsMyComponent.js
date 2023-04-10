@@ -21,7 +21,7 @@ let wsMyComponent = {
         <div class="datoIngreso d-flex  justify-content-between">
         <table class="table ">
         <tbody>
-        ${p1.ingresos.datos.map((val, id)=> {return `<tr class="trimportant text-end d-flex align-items-center justify-content-between"><td class="text-center">${val.tipo} </td> <td>${val.valor}</td>${p1.ingresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}<td class="tdimportant"><button id="btn${id}" class="btn3"> x </button></td></tr>`}).join("")}  
+        ${p1.ingresos.datos.map((val, id)=> {return `<tr class="trimportant text-end d-flex align-items-center justify-content-between"><td class="text-center">${val.tipo} </td> <td>${val.valor}</td>${p1.ingresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}<td class="tdimportant"><button id="btn2${id}" class="btn3"> x </button></td></tr>`}).join("")}  
         </tbody>
         </table>   
         </div>     
@@ -37,7 +37,22 @@ let wsMyComponent = {
         </div>    
     </div>`
       },
+     /*  eliminarbotones(){
+        console.log("estoy leyendo la función eliminarbotones");
+        for (let i = 0; i < cuenta; i++) {
+            console.log("esta es mi cuenta", cuenta);
+            console.log(i);
+            console.log(`#btn${i}`);
+            let botones = document.querySelector(`#btn${i}`);
+            console.log(botones);
+            botones.addEventListener("click", (e) => {
+              console.log(`hey, le di click al ${i} `);
+              console.log(this.contenido.egresos.datos);
+            });
+          } 
+      } */
     }
+    
 self.addEventListener("message", (e)=>{
     postMessage(wsMyComponent[`${e.data.module}`](e.data.data));
 })
