@@ -1,5 +1,6 @@
 import config from "../storage/config.js";
 let informacion = document.querySelector("#formulario");
+let tablass = document.querySelector("trimportant")
 
 let contadorIngresos = 0;
 let contadorEgresos = 0;
@@ -161,18 +162,26 @@ export default {
       initCharts();
 
       localStorage.setItem("myComponent", JSON.stringify(this));
-    
+      
         let cuenta = this.contenido.egresos.info[0].datos.length;
         for (let i = 0; i < cuenta; i++) {
-          let botones = document.querySelector(`#btn${i}`);
-          botones.addEventListener("click", (e) => {
+          var botones = document.querySelector(`#btn${i}`);
+          console.log(botones);
+          var accion = () => {
+            console.log("accion");
+          }
+         /*  botones.addEventListener("click", (e) => {
             console.log(`hey, le di click al  `);
-          });//no hace nada
-        
+          });//no hace nada */
+      
       }
-
-     
+      botones.addEventListener("click", accion)
+      
     });
+    
+ /*    tablass.addEventListener("click", (e)=>{
+      console.log("auch");
+    }) */
     
   },
   
