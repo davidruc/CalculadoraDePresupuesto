@@ -26,7 +26,7 @@ export default {
     });
     informacion.addEventListener("submit", (e) => {
       e.preventDefault();
-      let cuenta = this.contenido.egresos.info[0].datos.length;
+     
     
       let data = Object.fromEntries(new FormData(e.target));
 
@@ -95,17 +95,9 @@ export default {
 
       /* ws.postMessage({ module:"eliminarbotones"}) */
       
-      /* console.log(botones); */
-      for (let i = 0; i < cuenta; i++) {
-          console.log("esta es mi cuenta", cuenta);
-          console.log(i);
-          console.log(`#btn${i}`);
-          let botones = document.querySelector(`#btn${i}`);
-          botones.addEventListener("click", (e) => {
-            console.log(`hey, le di click al ${i} `);
-            console.log(this.contenido.egresos.datos);
-          });
-        } 
+      
+    
+        
       //Gráficas
       const getOptionChart = () => {
         return {
@@ -169,10 +161,23 @@ export default {
       initCharts();
 
       localStorage.setItem("myComponent", JSON.stringify(this));
+    
+        let cuenta = this.contenido.egresos.info[0].datos.length;
+        for (let i = 0; i < cuenta; i++) {
+          let botones = document.querySelector(`#btn${i}`);
+          botones.addEventListener("click", (e) => {
+            console.log(`hey, le di click al  `);
+          });//no hace nada
+        
+      }
+
+     
     });
+    
   },
-  eliminarbotones(){
-   
-      
-  }
+  
 };
+
+
+
+
