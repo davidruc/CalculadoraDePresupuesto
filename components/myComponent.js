@@ -1,12 +1,10 @@
 import config from "../storage/config.js";
 let informacion = document.querySelector("#formulario");
-let tablass = document.querySelector("trimportant")
 
 let contadorIngresos = 0;
 let contadorEgresos = 0;
 let disponible = 0;
-let porcentajetotal = 0;
-let cuenta = 0;
+let porcentajetotal = 0;  
 
 export default {
   show() {
@@ -27,55 +25,40 @@ export default {
     });
     informacion.addEventListener("submit", (e) => {
       e.preventDefault();
-     
-    
       let data = Object.fromEntries(new FormData(e.target));
-
       if (data.signo == "+") {
-        contadorIngresos =
-          this.contenido.ingresos.contador + parseInt(data.valor);
+        contadorIngresos = this.contenido.ingresos.contador + parseInt(data.valor);
         this.contenido.ingresos.datos.unshift(data);
         this.contenido.ingresos.contador = contadorIngresos;
-
         let calculoPorcentajes2 = 0;
-
         this.contenido.ingresos.info.map((val, id) => {
           val.porcentajes = [];
           val.datos.unshift(data.valor);
           val.nombres.unshift(data.tipo);
           val.datos.map((val2, id) => {
-            calculoPorcentajes2 = parseInt(
-              (parseInt(val2) * 100) / contadorIngresos
-            );
+            calculoPorcentajes2 = parseInt((parseInt(val2) * 100) / contadorIngresos);
             val.porcentajes.push(calculoPorcentajes2);
           });
         });
       } else {
         contadorEgresos =
-          this.contenido.egresos.contador - parseInt(data.valor);
+        this.contenido.egresos.contador - parseInt(data.valor);
         this.contenido.egresos.datos.unshift(data);
         this.contenido.egresos.contador = contadorEgresos;
-
         let calculoPorcentajes = 0;
-
         this.contenido.egresos.info.map((val, id) => {
           val.porcentajes = [];
           val.datos.unshift(data.valor);
           val.nombres.unshift(data.tipo);
           val.datos.map((val2, id) => {
-            calculoPorcentajes = parseInt(
-              -(parseInt(val2) * 100) / contadorEgresos
-            );
+            calculoPorcentajes = parseInt(-(parseInt(val2) * 100) / contadorEgresos);
             val.porcentajes.push(calculoPorcentajes);
           });
         });
       }
-      disponible =
-        this.contenido.ingresos.contador - -this.contenido.egresos.contador;
+      disponible = this.contenido.ingresos.contador - -this.contenido.egresos.contador;
       this.contenido.contador = disponible;
-      porcentajetotal =
-        -(100 * this.contenido.egresos.contador) /
-        this.contenido.ingresos.contador;
+      porcentajetotal = -(100 * this.contenido.egresos.contador) / this.contenido.ingresos.contador;
       this.contenido.egresos.porcentaje = parseInt(porcentajetotal);
       informacion.reset();
 
@@ -93,12 +76,7 @@ export default {
         document.querySelector(id[count]).append(...doc.body.children);
         id.length - 1 == count ? ws.terminate() : count++;
       });
-
-      /* ws.postMessage({ module:"eliminarbotones"}) */
-      
-      
-    
-        
+     
       //Gráficas
       const getOptionChart = () => {
         return {
@@ -124,12 +102,10 @@ export default {
           ],
         };
       };
-
       const initCharts = () => {
         const chart = echarts.init(document.querySelector("#graficas"));
         chart.setOption(getOptionChart());
       };
-
       const getOptionChart2 = () => {
         return {
           title: {
@@ -161,29 +137,32 @@ export default {
       initCharts2();
       initCharts();
 
+      
+
+
+
+
+
+
+      /* let cuenta = this.contenido.egresos.info[0].datos.length;
+      for (let i = 0; i < cuenta; i++) {
+        var botones = document.querySelector(`#btn${i}`);
+        console.log(botones); 
+      } */
       localStorage.setItem("myComponent", JSON.stringify(this));
       
-        let cuenta = this.contenido.egresos.info[0].datos.length;
-        for (let i = 0; i < cuenta; i++) {
-          var botones = document.querySelector(`#btn${i}`);
-          console.log(botones);
-          var accion = () => {
-            console.log("accion");
-          }
-         /*  botones.addEventListener("click", (e) => {
-            console.log(`hey, le di click al  `);
-          });//no hace nada */
-      
+      });  
+      /* console.log(botones);
+      botones.addEventListener("click", ()=>{
+        console.log("a ver");
+      }) */
+      function eliminarBoton() {
+        var boton = document.querySelector(`#btn`)
+        boton.remove();
       }
-      botones.addEventListener("click", accion)
       
-    });
-    
- /*    tablass.addEventListener("click", (e)=>{
-      console.log("auch");
-    }) */
-    
   },
+  
   
 };
 

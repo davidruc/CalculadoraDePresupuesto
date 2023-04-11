@@ -31,12 +31,14 @@ let wsMyComponent = {
         <div class="datoIngreso d-flex justify-content-between">
         <table class="table ">
         <tbody class="celda">
-        ${p1.egresos.datos.map((val, id)=> {return `<tr class="trimportant text-end d-flex align-items-center justify-content-between"><td class="text-center">${val.tipo} </td> <td>${val.valor}</td>${p1.egresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}<td class="tdimportant"><button id="btn${id}" class="btn3"> x </button></td></tr>`}).join("")}
+        ${p1.egresos.datos.map((val, id)=> {return `<tr id="trimpt" class="trimportant text-end d-flex align-items-center justify-content-between"><td class="text-center">${val.tipo} </td> <td>${val.valor}</td>${p1.egresos.info.map((val,id2)=>{return `<td>${val.porcentajes[id]}%</td>`})}<td class="tdimportant"><button id="btn" onclick="eliminarBoton()" class="btn3"> x </button></td></tr>`}).join("")}
         </tbody>
         </table>
         </div>    
     </div>`
       },
+      
+
      /*  eliminarbotones(){
         console.log("estoy leyendo la función eliminarbotones");
         for (let i = 0; i < cuenta; i++) {
