@@ -14,7 +14,7 @@ Es un proyecto que utiliza js nativo. Además, uso de la modularización de Java
 
 * Se usaron Workers para mejorar el rendimiento de la aplicación y el manejo de los datos.
 
-* Se utilizó la librería de gráficas [echarts](*https://echarts.apache.org/en/index.html*) para realizar un análisis más detallado de los datos ingresados al proyecto.
+* Se utilizó la librería de gráficas [echarts](https://echarts.apache.org/en/index.html) para realizar un análisis más detallado de los datos ingresados al proyecto.
 
 ## Advertencias
 * Se presentarion problemas en la implementación de los botones de actualizar y borrar datos. Esto principalmente a que la creación de los botones se realizó desde los workers y esto generaba un conflicto en su ejecución. Si en un futuro se desea continuar con el proyecto es necesario tener esto en cuenta.
